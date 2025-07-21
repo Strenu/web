@@ -67,11 +67,12 @@ CustomTransitionPage _buildPageWithFadeTransition({
   required BuildContext context,
   required GoRouterState state,
   required Widget child,
+  Duration duration = const Duration(milliseconds: 400),
 }) {
   return CustomTransitionPage(
     key: state.pageKey,
     child: child,
-    transitionDuration: const Duration(milliseconds: 300),
+    transitionDuration: duration,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return FadeTransition(
         opacity: CurvedAnimation(
