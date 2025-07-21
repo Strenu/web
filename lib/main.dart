@@ -55,7 +55,7 @@ class MainLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mi Empresa'),
+        title: const Text('Strenu'),
         backgroundColor: Colors.blueGrey[800],
         foregroundColor: Colors.white,
         actions: <Widget>[
