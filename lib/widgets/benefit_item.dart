@@ -7,6 +7,7 @@ class BenefitItem extends StatelessWidget {
   final String description;
 
   const BenefitItem({
+    super.key,
     required this.icon,
     required this.title,
     required this.description,
@@ -22,13 +23,20 @@ class BenefitItem extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             title,
-            style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 10),
           Text(
             description,
             textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(fontSize: 16, color: Colors.white70, height: 1.5),
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+              color: Colors.white70,
+              height: 1.5,
+            ),
           ),
         ],
       ),
