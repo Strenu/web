@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:strenu_utils/strenu_utils.dart';
 
-class AboutScreen extends StrenuAppSizeStatefulWidget {
+class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
   @override
-  StrenuAppSizeStatefulWidgetState<StrenuAppSizeStatefulWidget> createState() {
-    return _AboutScreenState();
-  }
-}
-
-class _AboutScreenState extends StrenuAppSizeStatefulWidgetState<AboutScreen> {
-  @override
-  Widget desktop(BuildContext context) {
-    return Text("About in desktop");
-  }
-
-  @override
-  Widget mobile(BuildContext context) {
-    return Text("About in mobile");
-  }
-
-  @override
-  Widget table(BuildContext context) {
-    return Text("About in table");
+  Widget build(BuildContext context) {
+    return Center(
+      key: const ValueKey('about'),
+      child: Text(
+        'Sobre Nosotros',
+        style: GoogleFonts.poppins(fontSize: 48, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }

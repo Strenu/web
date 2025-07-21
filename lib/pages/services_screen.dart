@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:strenu_utils/strenu_utils.dart';
 
-class ServicesScreen extends StrenuAppSizeStatefulWidget {
+class ServicesScreen extends StatelessWidget {
   const ServicesScreen({super.key});
 
   @override
-  StrenuAppSizeStatefulWidgetState<StrenuAppSizeStatefulWidget> createState() {
-    return _ServicesScreenState();
-  }
-}
-
-class _ServicesScreenState extends StrenuAppSizeStatefulWidgetState<ServicesScreen> {
-  @override
-  Widget desktop(BuildContext context) {
-    return Text("Services in desktop");
-  }
-
-  @override
-  Widget mobile(BuildContext context) {
-    return Text("Services in mobile");
-  }
-
-  @override
-  Widget table(BuildContext context) {
-    return Text("Services in table");
+  Widget build(BuildContext context) {
+    return Center(
+      key: const ValueKey('services'),
+      child: Text(
+        'Nuestros Servicios',
+        style: GoogleFonts.poppins(fontSize: 48, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }
