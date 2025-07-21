@@ -28,17 +28,29 @@ class MainLayout extends StatelessWidget {
           NavButton(
             text: 'Inicio',
             onPressed: () => context.go('/'),
-            isActive: GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString() == '/',
+            isActive:
+                GoRouter.of(
+                  context,
+                ).routerDelegate.currentConfiguration.uri.toString() ==
+                '/',
           ),
           NavButton(
             text: 'Servicios',
             onPressed: () => context.go('/services'),
-            isActive: GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString() == '/services',
+            isActive:
+                GoRouter.of(
+                  context,
+                ).routerDelegate.currentConfiguration.uri.toString() ==
+                '/services',
           ),
           NavButton(
             text: 'Sobre Nosotros',
             onPressed: () => context.go('/about'),
-            isActive: GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString() == '/about',
+            isActive:
+                GoRouter.of(
+                  context,
+                ).routerDelegate.currentConfiguration.uri.toString() ==
+                '/about',
           ),
           const SizedBox(width: 40),
         ],
@@ -46,10 +58,7 @@ class MainLayout extends StatelessWidget {
       body: Stack(
         children: [
           const AnimatedBackground(),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: child,
-          ),
+            child,
         ],
       ),
     );

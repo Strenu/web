@@ -21,21 +21,27 @@ class MyApp extends StatelessWidget {
           routes: <RouteBase>[
             GoRoute(
               path: '/',
-              builder: (BuildContext context, GoRouterState state) {
-                return const HomeScreen();
-              },
+              pageBuilder: (context, state) => _buildPageWithFadeTransition(
+                context: context,
+                state: state,
+                child: const HomeScreen(),
+              ),
             ),
             GoRoute(
               path: '/services',
-              builder: (BuildContext context, GoRouterState state) {
-                return const ServicesScreen();
-              },
+              pageBuilder: (context, state) => _buildPageWithFadeTransition(
+                context: context,
+                state: state,
+                child: const ServicesScreen(),
+              ),
             ),
             GoRoute(
               path: '/about',
-              builder: (BuildContext context, GoRouterState state) {
-                return const AboutScreen();
-              },
+              pageBuilder: (context, state) => _buildPageWithFadeTransition(
+                context: context,
+                state: state,
+                child: const AboutScreen(),
+              ),
             ),
           ],
         ),
@@ -55,4 +61,31 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
     );
   }
+}
+
+CustomTransitionPage _buildPageWithFadeTransition({
+  required BuildContext context,
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 300),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: CurvedAnimation(
+          parent: animation,
+          curve: const Interval(0.5, 1.0, curve: Curves.easeIn),
+        ),
+        child: FadeTransition(
+          opacity: CurvedAnimation(
+            parent: secondaryAnimation,
+            curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+          ).drive(Tween<double>(begin: 1.0, end: 0.0)),
+          child: child,
+        ),
+      );
+    },
+  );
 }
