@@ -23,8 +23,6 @@ class AnimatedBackground extends StatelessWidget {
 class ParticlePainter extends CustomPainter {
   final double angle;
   final List<Particle> particles;
-  final Random _random = Random();
-
 
   ParticlePainter(this.angle) : particles = List.generate(100, (index) => Particle(seed: index));
 
@@ -59,7 +57,6 @@ class ParticlePainter extends CustomPainter {
 
 class Particle {
   final int seed;
-  final Random _random;
   final Color color;
   final double size;
   final double initialX;
@@ -68,7 +65,6 @@ class Particle {
   final double velocityY;
 
   Particle({required this.seed}) : 
-    _random = Random(seed),
     color = Colors.white.withOpacity(Random(seed).nextDouble() * 0.5 + 0.1),
     size = Random(seed+1).nextDouble() * 2 + 1,
     initialX = Random(seed+2).nextDouble(),
