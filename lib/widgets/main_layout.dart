@@ -41,7 +41,7 @@ class MainLayout extends StatelessWidget {
                 GoRouter.of(
                   context,
                 ).routerDelegate.currentConfiguration.uri.toString() ==
-                '/services',
+                '/services',  
           ),
           NavButton(
             text: 'Sobre Nosotros',
