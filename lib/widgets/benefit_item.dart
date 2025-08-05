@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:strenu_web/widgets/strenu_base_card.dart';
 
 class BenefitItem extends StatelessWidget {
   final IconData icon;
@@ -15,31 +15,27 @@ class BenefitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 320,
-      child: Column(
-        children: [
-          Icon(icon, color: const Color(0xFF00BFFF), size: 40),
-          const SizedBox(height: 20),
-          Text(
-            title,
-            style: GoogleFonts.poppins(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            description,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              color: Colors.white70,
-              height: 1.5,
-            ),
-          ),
-        ],
-      ),
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min, // Restauramos esto para estabilidad
+      children: [
+        Icon(
+          icon,
+          size: 40,
+          color: colorScheme.primary,
+        ),
+        const SizedBox(height: 20),
+        Text(title, style: textTheme.titleLarge),
+        const SizedBox(height: 10),
+        Text(description, style: textTheme.bodyMedium),
+      ],
+    );
+
+    return StrenuBaseCard(
+      child: content,
     );
   }
 }

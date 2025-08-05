@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+// No es necesario importar 'AppTheme.dart'
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -8,56 +8,48 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    // Obtenemos los estilos y colores del contexto para una total consistencia.
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
-      height: screenHeight - kToolbarHeight,
-      alignment: Alignment.center,
+      // Usamos min-height para asegurar que no se desborde en pantallas pequeñas.
+      constraints: BoxConstraints(minHeight: screenHeight - kToolbarHeight),
       padding: const EdgeInsets.all(20.0),
+      // El fondo transparente es correcto para que se vea la animación de fondo del Scaffold.
+      color: Colors.transparent,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          ShaderMask(
-            shaderCallback: (bounds) => const LinearGradient(
-              colors: [Color(0xFF00BFFF), Color(0xFF1E90FF)],
-            ).createShader(bounds),
+        children: [
+          // NOTA: Para que la animación funcione, necesitarás un StatefulWidget.
+          // Por ahora, el widget está, pero la opacidad es fija.
+          AnimatedOpacity(
+            opacity: 1.0,
+            duration: const Duration(seconds: 1),
             child: Text(
-              'Transformamos Ideas en Soluciones Digitales de Alto Impacto',
+              'Empowering Your Digital Transformation',
               textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                fontSize: 60,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              // Usamos el estilo correcto del tema: 'displayMedium' para el titular principal.
+              style: textTheme.displayMedium,
             ),
           ),
           const SizedBox(height: 20),
-          Text(
-            'Creamos software a medida, aplicaciones web y móviles que potencian el crecimiento y la eficiencia de tu empresa.',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 22,
-              color: Colors.white.withOpacity(0.8),
+          AnimatedOpacity(
+            opacity: 1.0,
+            duration: const Duration(seconds: 2),
+            child: Text(
+              'We deliver innovative software solutions to help your business thrive in the digital age.',
+              textAlign: TextAlign.center,
+              // Usamos 'bodyMedium' para el texto de párrafo.
+              style: textTheme.bodyMedium,
             ),
           ),
           const SizedBox(height: 40),
+          // --- EL CAMBIO MÁS IMPORTANTE ---
+          // Simplemente usamos ElevatedButton. No necesita estilo.
+          // Automáticamente tomará el estilo naranja de nuestro AppTheme.
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00BFFF),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              elevation: 8,
-              shadowColor: const Color(0xFF00BFFF).withOpacity(0.5),
-            ),
             onPressed: () => context.go('/services'),
-            child: Text(
-              'Explora Nuestros Servicios',
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: const Text('Discover Our Services'),
           ),
         ],
       ),

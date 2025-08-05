@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:strenu_web/widgets/strenu_base_card.dart';
 
 class ServiceCard extends StatelessWidget {
   final IconData icon;
@@ -15,37 +15,27 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 400,
-      padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-        color: const Color(0xFF172A3A).withOpacity(0.5),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: const Color(0xFF00BFFF).withOpacity(0.3)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: const Color(0xFF00BFFF), size: 40),
-          const SizedBox(height: 20),
-          Text(
-            title,
-            style: GoogleFonts.poppins(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 15),
-          Text(
-            description,
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              color: Colors.white70,
-              height: 1.7,
-            ),
-          ),
-        ],
-      ),
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min, // Restauramos esto para estabilidad
+      children: [
+        Icon(
+          icon,
+          size: 40,
+          color: colorScheme.primary,
+        ),
+        const SizedBox(height: 20),
+        Text(title, style: textTheme.titleLarge),
+        const SizedBox(height: 10),
+        Text(description, style: textTheme.bodyMedium),
+      ],
+    );
+
+    return StrenuBaseCard(
+      child: content,
     );
   }
 }

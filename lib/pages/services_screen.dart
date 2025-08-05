@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:strenu_web/widgets/service_card.dart';
 import 'package:strenu_web/pages/home_sections/cta_section.dart';
 
@@ -8,27 +7,32 @@ class ServicesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtenemos los estilos del tema para usarlos en la página.
+    final textTheme = Theme.of(context).textTheme;
+    const double sectionSpacing = 120.0;
+
     return SingleChildScrollView(
       key: const ValueKey('services'),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50.0),
+        padding: const EdgeInsets.symmetric(horizontal: 50.0),
         child: Column(
           children: [
-            Text(
-              'Nuestros Servicios',
-              style: GoogleFonts.poppins(
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              'Ofrecemos un abanico completo de soluciones para llevar tu empresa al siguiente nivel.',
-              style: GoogleFonts.poppins(fontSize: 20, color: Colors.white70),
-              textAlign: TextAlign.center,
-            ),
             const SizedBox(height: 80),
+            Text(
+              'Our Services',
+              // Usamos el estilo para el titular principal de una página.
+              style: textTheme.displaySmall,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'We provide a comprehensive range of services to elevate your business.',
+              // Usamos el estilo para párrafos descriptivos importantes.
+              style: textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 60),
+            // Gracias a que 'ServiceCard' ya está tematizado, esto simplemente funciona.
             const Wrap(
               spacing: 40,
               runSpacing: 40,
@@ -36,36 +40,25 @@ class ServicesScreen extends StatelessWidget {
               children: [
                 ServiceCard(
                   icon: Icons.code_rounded,
-                  title: 'Desarrollo de Software a Medida',
-                  description:
-                      'Analizamos tus necesidades para construir soluciones robustas, escalables y seguras que se integran perfectamente con tus operaciones. Creamos desde sistemas de gestión interna (ERP, CRM) hasta plataformas complejas de alta demanda.',
+                  title: 'Custom Software Development',
+                  description: 'Tailored solutions to meet your unique business needs.',
                 ),
                 ServiceCard(
                   icon: Icons.devices_rounded,
-                  title: 'Aplicaciones Web y Móviles',
-                  description:
-                      'Diseñamos y desarrollamos aplicaciones nativas (iOS/Android) y web progresivas (PWA) centradas en una experiencia de usuario excepcional. Tu negocio en el bolsillo de tus clientes, disponible en cualquier momento y lugar.',
+                  title: 'Web & Mobile Applications',
+                  description: 'Engaging apps designed for seamless user experiences.',
                 ),
                 ServiceCard(
                   icon: Icons.cloud_upload_rounded,
-                  title: 'Soluciones Cloud',
-                  description:
-                      'Migramos tu infraestructura a la nube (AWS, Google Cloud, Azure) y gestionamos servicios para optimizar costes, mejorar la seguridad y garantizar una alta disponibilidad. Automatización, despliegue continuo y monitorización proactiva.',
+                  title: 'Cloud Solutions & AWS Consulting', // Ampliado para ser más específico
+                  description: 'Secure, scalable cloud infrastructure and expert AWS guidance.',
                 ),
-                ServiceCard(
-                  icon: Icons.support_agent_rounded,
-                  title: 'Consultoría Tecnológica',
-                  description:
-                      'Te asesoramos para que tomes las mejores decisiones tecnológicas. Realizamos auditorías de sistemas, definimos arquitecturas de software y diseñamos una hoja de ruta digital alineada con tus objetivos de negocio.',
-                ),
+                // Podrías añadir más servicios aquí fácilmente
               ],
             ),
-            const SizedBox(height: 120),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50.0),
-              child: CtaSection(),
-            ),
-            const SizedBox(height: 50),
+            const SizedBox(height: sectionSpacing),
+            const CtaSection(),
+            const SizedBox(height: 80),
           ],
         ),
       ),

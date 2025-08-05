@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'animated_background.dart';
 import 'nav_button.dart';
 
@@ -11,46 +9,35 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtenemos los estilos y la ruta actual una sola vez para ser más eficientes.
+    final textTheme = Theme.of(context).textTheme;
+    final String currentLocation = GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
+
     return Scaffold(
+      // El AppBar tomará su estilo (transparente, sin elevación) del AppTheme.
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xFF0D1B2A).withOpacity(0.85),
+        // Usamos un estilo semántico para el título.
         title: Text(
           'STRENU',
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-            letterSpacing: 2,
-          ),
+          style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: false,
         actions: <Widget>[
           NavButton(
             text: 'Inicio',
             onPressed: () => context.go('/'),
-            isActive:
-                GoRouter.of(
-                  context,
-                ).routerDelegate.currentConfiguration.uri.toString() ==
-                '/',
+            // La lógica de 'isActive' ahora es mucho más limpia.
+            isActive: currentLocation == '/',
           ),
           NavButton(
             text: 'Servicios',
             onPressed: () => context.go('/services'),
-            isActive:
-                GoRouter.of(
-                  context,
-                ).routerDelegate.currentConfiguration.uri.toString() ==
-                '/services',  
+            isActive: currentLocation == '/services',
           ),
           NavButton(
             text: 'Sobre Nosotros',
             onPressed: () => context.go('/about'),
-            isActive:
-                GoRouter.of(
-                  context,
-                ).routerDelegate.currentConfiguration.uri.toString() ==
-                '/about',
+            isActive: currentLocation == '/about',
           ),
           const SizedBox(width: 40),
         ],
@@ -58,7 +45,8 @@ class MainLayout extends StatelessWidget {
       body: Stack(
         children: [
           const AnimatedBackground(),
-            child,
+          // El contenido de la página se renderiza por encima del fondo.
+          child,
         ],
       ),
     );

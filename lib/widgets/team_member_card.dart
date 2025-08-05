@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TeamMemberCard extends StatelessWidget {
   final String name;
@@ -15,45 +14,50 @@ class TeamMemberCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.network(
-              imageUrl,
-              width: 150,
-              height: 150,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Colors.grey[800],
-                  borderRadius: BorderRadius.circular(100),
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Card(
+      // Clip.antiAlias asegura que la imagen no se desborde de los bordes redondeados.
+      clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+        child: Column(
+          // Centramos el contenido verticalmente en la celda del Grid
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipOval(
+              child: Image.network(
+                imageUrl,
+                width: 140,
+                height: 140,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  width: 140,
+                  height: 140,
+                  color: colorScheme.primary,
+                  child: Icon(
+                    Icons.person_outline_rounded,
+                    color: colorScheme.onPrimary,
+                    size: 70,
+                  ),
                 ),
-                child: const Icon(Icons.person, color: Colors.white, size: 60),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            name,
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            const SizedBox(height: 24),
+            Text(
+              name,
+              style: textTheme.titleLarge,
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            role,
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              color: const Color(0xFF00BFFF),
+            const SizedBox(height: 8),
+            Text(
+              role,
+              style: textTheme.bodyLarge?.copyWith(color: colorScheme.primary),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,45 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:strenu_web/widgets/feature_card.dart';
+import 'package:strenu_web/widgets/responsive_card_layout.dart'; // Importamos el nuevo layout
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Nuestros Servicios Principales',
-            style: GoogleFonts.poppins(fontSize: 40, fontWeight: FontWeight.bold),
+            'Our Expertise',
+            style: textTheme.headlineMedium,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 20),
           Text(
-            'Soluciones tecnológicas diseñadas para resolver tus desafíos más complejos.',
-            style: GoogleFonts.poppins(fontSize: 18, color: Colors.white70),
+            'Innovative solutions tailored to your business needs.',
+            style: textTheme.bodyMedium,
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 50),
-          const Wrap(
-            spacing: 40,
-            runSpacing: 40,
-            alignment: WrapAlignment.center,
-            children: [
+          // Reemplazamos el Wrap por nuestro nuevo layout inteligente.
+          const ResponsiveCardLayout(
+            cards: [
               FeatureCard(
-                icon: Icons.code,
-                title: 'Desarrollo a Medida',
-                description: 'Plataformas y sistemas únicos, construidos desde cero para adaptarse perfectamente a tus procesos de negocio.',
+                icon: Icons.code_rounded,
+                title: 'Custom Development',
+                description: 'Bespoke platforms and systems designed to streamline your operations and drive growth.',
               ),
               FeatureCard(
-                icon: Icons.web,
-                title: 'Aplicaciones Web y Móviles',
-                description: 'Experiencias de usuario fluidas y atractivas en cualquier dispositivo, conectando tu negocio con tus clientes.',
+                icon: Icons.smartphone_rounded,
+                title: 'Mobile & Web Apps',
+                description: 'Engaging and responsive applications that connect your business with your audience. We build solutions that are not only functional but also beautiful and intuitive.',
               ),
               FeatureCard(
-                icon: Icons.cloud_queue,
-                title: 'Soluciones en la Nube',
-                description: 'Infraestructura escalable, segura y de alto rendimiento para garantizar la continuidad y eficiencia de tus operaciones.',
+                icon: Icons.cloud_rounded,
+                title: 'Cloud Solutions',
+                description: 'Secure and scalable cloud infrastructure to ensure seamless operations.',
               ),
             ],
           ),

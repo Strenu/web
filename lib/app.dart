@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'theme.dart';
 
 import 'pages/home_screen.dart';
 import 'pages/services_screen.dart';
@@ -51,13 +51,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Strenu Tech Landing',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: const Color(0xFF0D1B2A),
-        scaffoldBackgroundColor: const Color(0xFF0D1B2A),
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white, displayColor: Colors.white),
-      ),
+      theme: AppTheme.themeData, // Use the unified theme
       routerConfig: router,
     );
   }

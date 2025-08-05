@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
+import '../theme.dart';
 
 class AnimatedBackground extends StatelessWidget {
   const AnimatedBackground({super.key});
@@ -33,7 +34,7 @@ class ParticlePainter extends CustomPainter {
 
     for (var particle in particles) {
       final pos = particle.calculatePosition(angle, size);
-      paint.color = particle.color;
+      paint.color = AppTheme.primaryColor; // Use theme color
       canvas.drawCircle(pos, particle.size, paint);
     }
 
@@ -44,7 +45,7 @@ class ParticlePainter extends CustomPainter {
         final distance = (pos1 - pos2).distance;
 
         if (distance < 150) {
-          linePaint.color = Colors.white.withOpacity((1 - distance / 150) * 0.1);
+          linePaint.color = AppTheme.primaryColor.withOpacity((1 - distance / 150) * 0.1); // Use theme color
           canvas.drawLine(pos1, pos2, linePaint);
         }
       }

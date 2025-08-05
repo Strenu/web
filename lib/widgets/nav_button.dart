@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NavButton extends StatefulWidget {
   final String text;
@@ -14,7 +13,7 @@ class NavButton extends StatefulWidget {
   });
 
   @override
-  _NavButtonState createState() => _NavButtonState();
+  State<NavButton> createState() => _NavButtonState();
 }
 
 class _NavButtonState extends State<NavButton> {
@@ -22,35 +21,44 @@ class _NavButtonState extends State<NavButton> {
 
   @override
   Widget build(BuildContext context) {
-    final color = widget.isActive ? const Color(0xFF00BFFF) : Colors.white;
-    final underline = _isHovered || widget.isActive;
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    // La lógica para determinar el estado es perfecta, la mantenemos.
+    final bool isUnderlined = _isHovered || widget.isActive;
+    // El color del texto depende solo de si la ruta está activa.
+    final Color textColor = widget.isActive ? colorScheme.primary : colorScheme.onSurface;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
       child: TextButton(
-        style: TextButton.styleFrom(
-          foregroundColor: color,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-        ),
         onPressed: widget.onPressed,
+        style: TextButton.styleFrom(
+          // Usamos el estilo del tema como base, pero quitamos el splash effect.
+          splashFactory: NoSplash.splashFactory,
+          // El padding lo manejaremos dentro del Column para un mejor control.
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               widget.text,
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w600,
-                color: color,
+              // Usamos el estilo 'labelLarge' del tema, que es el semántico para botones.
+              style: textTheme.labelLarge?.copyWith(
+                color: textColor, // Aplicamos el color que hemos calculado.
               ),
             ),
             const SizedBox(height: 4),
+            // Tu implementación de AnimatedContainer es genial, solo la hacemos 'theme-aware'.
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 2,
-              width: underline ? 30 : 0,
-              color: const Color(0xFF00BFFF),
+              width: isUnderlined ? 30 : 0,
+              // El color del subrayado siempre es el primario.
+              color: colorScheme.primary,
             )
           ],
         ),
