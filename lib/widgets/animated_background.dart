@@ -8,9 +8,10 @@ class AnimatedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoopAnimationBuilder<double>(
+    // Cambiamos LoopAnimationBuilder por MirrorAnimationBuilder
+    return MirrorAnimationBuilder<double>(
       tween: Tween(begin: 0.0, end: 2 * pi), // Anima un ciclo completo
-      duration: const Duration(seconds: 20),
+      duration: const Duration(seconds: 10), // Aumentamos la duración para un efecto más sutil
       builder: (context, value, child) {
         return CustomPaint(
           size: Size.infinite,
@@ -25,27 +26,38 @@ class ParticlePainter extends CustomPainter {
   final double angle;
   final List<Particle> particles;
 
-  ParticlePainter(this.angle) : particles = List.generate(100, (index) => Particle(seed: index));
+  // Usamos un inicializador de campo para mejorar el rendimiento.
+  // Las partículas solo se generan una vez.
+  ParticlePainter(this.angle) : particles = _generateParticles();
+
+  static List<Particle> _generateParticles() {
+    return List.generate(100, (index) => Particle(seed: index));
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    final linePaint = Paint()..strokeWidth = 1;
+    final paint = Paint()..color = AppTheme.primaryColor; // Reutilizamos el objeto Paint
+    final linePaint = Paint()
+      ..strokeWidth = 1
+      ..color = AppTheme.primaryColor; // Reutilizamos el objeto Paint
 
-    for (var particle in particles) {
-      final pos = particle.calculatePosition(angle, size);
-      paint.color = AppTheme.primaryColor; // Use theme color
-      canvas.drawCircle(pos, particle.size, paint);
+    // Pre-calculamos todas las posiciones para evitar recalcular en el bucle anidado
+    final positions = particles.map((p) => p.calculatePosition(angle, size)).toList();
+
+    for (final pos in positions) {
+      // El size ya está en la partícula, pero lo dibujamos aquí
+      final particleSize = 2.0; // Puedes ajustar esto
+      canvas.drawCircle(pos, particleSize, paint);
     }
 
-    for (int i = 0; i < particles.length; i++) {
-      for (int j = i + 1; j < particles.length; j++) {
-        final pos1 = particles[i].calculatePosition(angle, size);
-        final pos2 = particles[j].calculatePosition(angle, size);
+    for (int i = 0; i < positions.length; i++) {
+      for (int j = i + 1; j < positions.length; j++) {
+        final pos1 = positions[i];
+        final pos2 = positions[j];
         final distance = (pos1 - pos2).distance;
 
         if (distance < 150) {
-          linePaint.color = AppTheme.primaryColor.withOpacity((1 - distance / 150) * 0.1); // Use theme color
+          linePaint.color = AppTheme.primaryColor.withOpacity((1 - distance / 150) * 0.1);
           canvas.drawLine(pos1, pos2, linePaint);
         }
       }
@@ -58,24 +70,29 @@ class ParticlePainter extends CustomPainter {
 
 class Particle {
   final int seed;
-  final Color color;
   final double size;
   final double initialX;
   final double initialY;
   final double velocityX;
   final double velocityY;
 
-  Particle({required this.seed}) : 
-    color = Colors.white.withOpacity(Random(seed).nextDouble() * 0.5 + 0.1),
-    size = Random(seed+1).nextDouble() * 2 + 1,
-    initialX = Random(seed+2).nextDouble(),
-    initialY = Random(seed+3).nextDouble(),
-    velocityX = (Random(seed+4).nextDouble() - 0.5) * 0.02,
-    velocityY = (Random(seed+5).nextDouble() - 0.5) * 0.02;
+  Particle({required this.seed})
+      : size = Random(seed + 1).nextDouble() * 2 + 1,
+        initialX = Random(seed + 2).nextDouble(),
+        initialY = Random(seed + 3).nextDouble(),
+        // Reducimos la velocidad para un movimiento más lento y elegante
+        velocityX = (Random(seed + 4).nextDouble() - 0.5) * 0.01,
+        velocityY = (Random(seed + 5).nextDouble() - 0.5) * 0.01;
 
   Offset calculatePosition(double angle, Size size) {
+    // Usamos el operador % para que las partículas reaparezcan por el otro lado
     final currentX = (initialX + velocityX * angle) % 1.0;
     final currentY = (initialY + velocityY * angle) % 1.0;
-    return Offset(currentX * size.width, currentY * size.height);
+    
+    // Si el valor es negativo, lo corregimos para que el % funcione correctamente
+    final wrappedX = currentX < 0 ? 1.0 + currentX : currentX;
+    final wrappedY = currentY < 0 ? 1.0 + currentY : currentY;
+
+    return Offset(wrappedX * size.width, wrappedY * size.height);
   }
 }

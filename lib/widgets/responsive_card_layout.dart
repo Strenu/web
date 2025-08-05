@@ -17,16 +17,17 @@ class ResponsiveCardLayout extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > breakpoint) {
-          // Volvemos a la Row con IntrinsicHeight
+          // IntrinsicHeight mide al hijo más alto y fuerza a todos a esa altura.
           return IntrinsicHeight(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start, // Usamos start para evitar conflictos
+              // Stretch es la orden de "estírate" para los hijos.
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: _addSpacing(cards, spacing),
             ),
           );
         } else {
-          // En pantallas estrechas, el Wrap funciona perfectamente.
+          // En pantallas estrechas, el Wrap es perfecto.
           return Wrap(
             spacing: spacing,
             runSpacing: spacing,

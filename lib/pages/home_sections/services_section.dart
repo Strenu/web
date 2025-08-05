@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:strenu_web/widgets/feature_card.dart';
-import 'package:strenu_web/widgets/responsive_card_layout.dart'; // Importamos el nuevo layout
+import 'package:strenu_web/widgets/responsive_card_layout.dart';
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});
@@ -9,6 +9,7 @@ class ServicesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
+    // Esta sección NO tiene scroll. Es solo un contenedor con su contenido.
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
       child: Column(
@@ -16,6 +17,7 @@ class ServicesSection extends StatelessWidget {
         children: [
           Text(
             'Our Expertise',
+            // Usamos headlineMedium para los títulos de sección de la Home
             style: textTheme.headlineMedium,
           ),
           const SizedBox(height: 20),
@@ -25,7 +27,6 @@ class ServicesSection extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 50),
-          // Reemplazamos el Wrap por nuestro nuevo layout inteligente.
           const ResponsiveCardLayout(
             cards: [
               FeatureCard(
@@ -36,7 +37,7 @@ class ServicesSection extends StatelessWidget {
               FeatureCard(
                 icon: Icons.smartphone_rounded,
                 title: 'Mobile & Web Apps',
-                description: 'Engaging and responsive applications that connect your business with your audience. We build solutions that are not only functional but also beautiful and intuitive.',
+                description: 'Engaging and responsive applications that connect your business with your audience.',
               ),
               FeatureCard(
                 icon: Icons.cloud_rounded,

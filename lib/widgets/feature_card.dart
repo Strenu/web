@@ -20,7 +20,7 @@ class FeatureCard extends StatelessWidget {
 
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min, // Restauramos esto para estabilidad
+      // SIN 'mainAxisSize: MainAxisSize.min'. Esto permite que la columna se estire.
       children: [
         Icon(
           icon,

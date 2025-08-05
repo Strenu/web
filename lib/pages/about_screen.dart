@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:strenu_web/widgets/benefit_item.dart';
+import 'package:strenu_web/widgets/footer.dart';
 import 'package:strenu_web/widgets/team_member_card.dart';
-import 'package:strenu_web/widgets/responsive_card_layout.dart'; // Importamos el nuevo layout
+import 'package:strenu_web/widgets/responsive_card_layout.dart';
 import 'package:strenu_web/pages/home_sections/cta_section.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -12,26 +13,27 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const double verticalSpacing = 80.0;
 
-    return SingleChildScrollView(
+    // La página es un ListView que contiene todas sus secciones y el Footer.
+    return ListView(
       key: const ValueKey('about'),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50.0),
-        child: Column(
-          children: [
-            const SizedBox(height: verticalSpacing),
-            _buildMissionSection(context).animate().fade(duration: 500.ms),
-            const SizedBox(height: verticalSpacing),
-            _buildValuesSection(context).animate().fade(duration: 500.ms).slideY(begin: 0.1),
-            const SizedBox(height: verticalSpacing),
-            _buildTeamSection(context).animate().fade(duration: 500.ms).slideY(begin: 0.1),
-            const SizedBox(height: verticalSpacing),
-            const CtaSection().animate().fade(duration: 500.ms),
-            const SizedBox(height: verticalSpacing),
-          ],
-        ),
-      ),
+      // El padding horizontal se aplica directamente al ListView.
+      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+      children: [
+        const SizedBox(height: verticalSpacing),
+        _buildMissionSection(context).animate().fade(duration: 500.ms),
+        const SizedBox(height: verticalSpacing),
+        _buildValuesSection(context).animate().fade(duration: 500.ms).slideY(begin: 0.1),
+        const SizedBox(height: verticalSpacing),
+        _buildTeamSection(context).animate().fade(duration: 500.ms).slideY(begin: 0.1),
+        const SizedBox(height: verticalSpacing),
+        const CtaSection().animate().fade(duration: 500.ms),
+        const SizedBox(height: verticalSpacing),
+        const Footer(),
+      ],
     );
   }
+
+  // --- MÉTODOS PRIVADOS PARA CONSTRUIR CADA SECCIÓN ---
 
   Widget _buildMissionSection(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -61,7 +63,6 @@ class AboutScreen extends StatelessWidget {
           style: textTheme.displaySmall,
         ),
         const SizedBox(height: 60),
-        // Aplicamos el layout inteligente aquí.
         const ResponsiveCardLayout(
           cards: [
             BenefitItem(
@@ -99,7 +100,6 @@ class AboutScreen extends StatelessWidget {
           style: textTheme.bodyMedium,
         ),
         const SizedBox(height: 60),
-        // Y lo aplicamos también aquí.
         const ResponsiveCardLayout(
           cards: [
             TeamMemberCard(

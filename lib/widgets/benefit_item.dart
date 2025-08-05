@@ -20,7 +20,6 @@ class BenefitItem extends StatelessWidget {
 
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min, // Restauramos esto para estabilidad
       children: [
         Icon(
           icon,

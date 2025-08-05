@@ -1,86 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'theme.dart';
-
-import 'pages/home_screen.dart';
-import 'pages/services_screen.dart';
-import 'pages/about_screen.dart';
-import 'widgets/main_layout.dart';
+import 'package:strenu_web/widgets/main_layout.dart';
+import 'package:strenu_web/pages/about_screen.dart';
+import 'package:strenu_web/pages/home_screen.dart';
+import 'package:strenu_web/pages/services_screen.dart';
+import 'package:strenu_web/theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter router = GoRouter(
-      routes: <RouteBase>[
-        ShellRoute(
-          builder: (context, state, child) {
-            return MainLayout(child: child);
-          },
-          routes: <RouteBase>[
-            GoRoute(
-              path: '/',
-              pageBuilder: (context, state) => _buildPageWithFadeTransition(
-                context: context,
-                state: state,
-                child: const HomeScreen(),
-              ),
-            ),
-            GoRoute(
-              path: '/services',
-              pageBuilder: (context, state) => _buildPageWithFadeTransition(
-                context: context,
-                state: state,
-                child: const ServicesScreen(),
-              ),
-            ),
-            GoRoute(
-              path: '/about',
-              pageBuilder: (context, state) => _buildPageWithFadeTransition(
-                context: context,
-                state: state,
-                child: const AboutScreen(),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-
     return MaterialApp.router(
-      title: 'Strenu Tech Landing',
+      title: 'STRENU - Software Development',
+      theme: AppTheme.themeData,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.themeData, // Use the unified theme
-      routerConfig: router,
+      routerConfig: _router,
     );
   }
 }
 
-CustomTransitionPage _buildPageWithFadeTransition({
-  required BuildContext context,
-  required GoRouterState state,
-  required Widget child,
-  Duration duration = const Duration(milliseconds: 400),
-}) {
-  return CustomTransitionPage(
-    key: state.pageKey,
-    child: child,
-    transitionDuration: duration,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return FadeTransition(
-        opacity: CurvedAnimation(
-          parent: animation,
-          curve: const Interval(0.5, 1.0, curve: Curves.easeIn),
+// Configuración de GoRouter
+final _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    // ShellRoute envuelve todas las rutas hijas con el MainLayout
+    ShellRoute(
+      builder: (context, state, child) {
+        // El 'child' que recibe aquí es la página que corresponde a la ruta (HomeScreen, etc.)
+        return MainLayout(child: child);
+      },
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const HomeScreen(),
         ),
-        child: FadeTransition(
-          opacity: CurvedAnimation(
-            parent: secondaryAnimation,
-            curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
-          ).drive(Tween<double>(begin: 1.0, end: 0.0)),
-          child: child,
+        GoRoute(
+          path: '/services',
+          builder: (context, state) => const ServicesScreen(),
         ),
-      );
-    },
-  );
-}
+        GoRoute(
+          path: '/about',
+          builder: (context, state) => const AboutScreen(),
+        ),
+      ],
+    ),
+  ],
+);

@@ -24,10 +24,14 @@ class _NavButtonState extends State<NavButton> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    // La lógica para determinar el estado es perfecta, la mantenemos.
     final bool isUnderlined = _isHovered || widget.isActive;
-    // El color del texto depende solo de si la ruta está activa.
     final Color textColor = widget.isActive ? colorScheme.primary : colorScheme.onSurface;
+
+    // --- LA CORRECCIÓN ---
+    // 1. Obtenemos el estilo base del tema.
+    final TextStyle baseStyle = textTheme.labelLarge ?? const TextStyle(); 
+    // 2. Aplicamos nuestros cambios sobre ese estilo base.
+    final TextStyle buttonTextStyle = baseStyle.copyWith(color: textColor);
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -36,9 +40,7 @@ class _NavButtonState extends State<NavButton> {
       child: TextButton(
         onPressed: widget.onPressed,
         style: TextButton.styleFrom(
-          // Usamos el estilo del tema como base, pero quitamos el splash effect.
           splashFactory: NoSplash.splashFactory,
-          // El padding lo manejaremos dentro del Column para un mejor control.
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
         child: Column(
@@ -46,18 +48,13 @@ class _NavButtonState extends State<NavButton> {
           children: [
             Text(
               widget.text,
-              // Usamos el estilo 'labelLarge' del tema, que es el semántico para botones.
-              style: textTheme.labelLarge?.copyWith(
-                color: textColor, // Aplicamos el color que hemos calculado.
-              ),
+              style: buttonTextStyle, // 3. Usamos el estilo seguro.
             ),
             const SizedBox(height: 4),
-            // Tu implementación de AnimatedContainer es genial, solo la hacemos 'theme-aware'.
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 2,
               width: isUnderlined ? 30 : 0,
-              // El color del subrayado siempre es el primario.
               color: colorScheme.primary,
             )
           ],
