@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:strenu_web/widgets/max_width_container.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // 1. Importamos el nuevo paquete
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
-  // --- URLs de tus redes sociales ---
   static final Uri _instagramUrl = Uri.parse('https://instagram.com/#');
   static final Uri _linkedinUrl = Uri.parse('https://www.linkedin.com/#');
   static final Uri _xUrl = Uri.parse('https://x.com/#');
@@ -60,7 +59,7 @@ class Footer extends StatelessWidget {
               const Divider(thickness: 0.5),
               const SizedBox(height: 20),
               Text(
-                '© $currentYear STRENU. Todos los derechos reservados.',
+                '© $currentYear STRENU. All rights reserved.',
                 style: textTheme.bodySmall?.copyWith(color: Colors.white54),
               ),
             ],
@@ -70,7 +69,6 @@ class Footer extends StatelessWidget {
     );
   }
 
-  // --- MÉTODO DE REDES SOCIALES ACTUALIZADO ---
   Widget _buildSocialsColumn(BuildContext context, TextTheme textTheme, CrossAxisAlignment crossAxisAlignment) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
@@ -80,7 +78,6 @@ class Footer extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // 2. Reemplazamos Icon por FaIcon con los logos oficiales
             IconButton(
               icon: const FaIcon(FontAwesomeIcons.instagram),
               onPressed: () => _launchUrl(_instagramUrl),
@@ -133,11 +130,11 @@ class Footer extends StatelessWidget {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
-        Text('Navegación', style: textTheme.titleMedium),
+        Text('Navigation', style: textTheme.titleMedium),
         const SizedBox(height: 10),
-        _FooterLink(text: 'Inicio', onTap: () => context.go('/')),
-        _FooterLink(text: 'Servicios', onTap: () => context.go('/services')),
-        _FooterLink(text: 'Sobre Nosotros', onTap: () => context.go('/about')),
+        _FooterLink(text: 'Home', onTap: () => context.go('/')),
+        _FooterLink(text: 'Services', onTap: () => context.go('/services')),
+        _FooterLink(text: 'About Us', onTap: () => context.go('/about')),
       ],
     );
   }

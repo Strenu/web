@@ -25,20 +25,18 @@ class MainLayout extends StatelessWidget {
                 'STRENU',
                 style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
-              const Spacer(), // Empuja el contenido a los lados
-              // Ocultamos los botones de texto en pantallas más pequeñas
+              const Spacer(),
               if (MediaQuery.of(context).size.width > 720)
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    NavButton(text: 'Inicio', onPressed: () => context.go('/'), isActive: currentLocation == '/'),
-                    NavButton(text: 'Servicios', onPressed: () => context.go('/services'), isActive: currentLocation == '/services'),
-                    NavButton(text: 'Sobre Nosotros', onPressed: () => context.go('/about'), isActive: currentLocation == '/about'),
+                    NavButton(text: 'Home', onPressed: () => context.go('/'), isActive: currentLocation == '/'),
+                    NavButton(text: 'Services', onPressed: () => context.go('/services'), isActive: currentLocation == '/services'),
+                    NavButton(text: 'About Us', onPressed: () => context.go('/about'), isActive: currentLocation == '/about'),
                     const SizedBox(width: 20),
-                    // El botón de Contactar, siempre visible si hay espacio
                     ElevatedButton(
                       onPressed: () => context.go('/contact'),
-                      child: const Text('Contactar'),
+                      child: const Text('Contact'),
                     )
                   ],
                 ),
@@ -46,8 +44,6 @@ class MainLayout extends StatelessWidget {
           ),
         ),
       ),
-      // Aquí podrías configurar un Drawer para la navegación en móvil
-      // drawer: MediaQuery.of(context).size.width <= 720 ? const AppDrawer() : null,
       body: Stack(
         children: [
           ShaderMask(
@@ -62,7 +58,7 @@ class MainLayout extends StatelessWidget {
             blendMode: BlendMode.dstIn,
             child: const AnimatedBackground(),
           ),
-          child, // Aquí se renderiza la página actual (HomeScreen, etc.)
+          child,
         ],
       ),
     );
