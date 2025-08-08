@@ -20,13 +20,9 @@ class FeatureCard extends StatelessWidget {
 
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      // SIN 'mainAxisSize: MainAxisSize.min'. Esto permite que la columna se estire.
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          icon,
-          size: 40,
-          color: colorScheme.primary,
-        ),
+        Icon(icon, size: 40, color: colorScheme.primary),
         const SizedBox(height: 20),
         Text(title, style: textTheme.titleLarge),
         const SizedBox(height: 10),
@@ -34,8 +30,12 @@ class FeatureCard extends StatelessWidget {
       ],
     );
 
-    return StrenuBaseCard(
-      child: content,
+    // --- LA CORRECCIÓN ESTÁ AQUÍ ---
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 280),
+      child: StrenuBaseCard(
+        child: content,
+      ),
     );
   }
 }

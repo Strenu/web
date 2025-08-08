@@ -22,20 +22,24 @@ class BenefitItem extends StatelessWidget {
 
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min, // Lo restauramos para que la tarjeta se ajuste a su contenido
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 40, color: colorScheme.primary),
         const SizedBox(height: 20),
         Text(title, style: textTheme.titleLarge),
         const SizedBox(height: 10),
         Text(description, style: textTheme.bodyMedium),
-        // const Spacer(), // <-- LÍNEA ELIMINADA QUE CAUSABA EL ERROR
       ],
     );
 
-    return StrenuBaseCard(
-      enableHover: enableHover,
-      child: content,
+    // --- LA CORRECCIÓN ESTÁ AQUÍ ---
+    // Envolvemos la tarjeta base en un ConstrainedBox para darle una altura mínima.
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 280), // Altura mínima generosa
+      child: StrenuBaseCard(
+        enableHover: enableHover,
+        child: content,
+      ),
     );
   }
 }
