@@ -325,15 +325,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  strenu_utils:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: develop
-      resolved-ref: "5e237305628379cce8164eb87efd40fc647cf693"
-      url: "https://github.com/Strenu/strenu_flutter_utils.git"
-    source: git
-    version: "0.0.1"
   string_scanner:
     dependency: transitive
     description:
