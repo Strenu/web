@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:strenu_web/widgets/animated_background.dart';
 import 'package:strenu_web/pages/home_sections/hero_section.dart';
-import 'package:strenu_web/pages/home_sections/services_section.dart';
+import 'package:strenu_web/pages/home_sections/projects_section.dart';
+import 'package:strenu_web/pages/home_sections/testimonials_section.dart';
 import 'package:strenu_web/pages/home_sections/whyus_section.dart';
 import 'package:strenu_web/pages/home_sections/cta_section.dart';
 import 'package:strenu_web/widgets/footer.dart';
@@ -14,10 +15,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Definimos las secciones que irán dentro del contenedor centrado
     final List<Widget> sections = [
-      const ServicesSection(),
+      const ProjectsSection(),
       const StrenuDivider(),
       const WhyUsSection(),
+      const StrenuDivider(),
+      const TestimonialsSection(),
       const StrenuDivider(),
       const CtaSection(),
     ];
@@ -39,24 +43,22 @@ class HomeScreen extends StatelessWidget {
         ListView(
           key: const ValueKey('home'),
           children: [
-            const HeroSection(),
+            const HeroSection(), // Hero Section a ancho completo
+            // Contenedor principal para el resto del contenido
             MaxWidthContainer(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: Column(
-                  children: AnimateList(
-                    interval: 100.ms,
-                    effects: [
-                      FadeEffect(duration: 500.ms, curve: Curves.easeOut),
-                      SlideEffect(begin: const Offset(0, 0.05), curve: Curves.easeOut),
-                    ],
-                    children: sections,
-                  ),
+              child: Column(
+                children: AnimateList(
+                  interval: 100.ms,
+                  effects: [
+                    FadeEffect(duration: 500.ms, curve: Curves.easeOut),
+                    SlideEffect(begin: const Offset(0, 0.05), curve: Curves.easeOut),
+                  ],
+                  children: sections,
                 ),
               ),
             ),
             const SizedBox(height: 80),
-            const Footer(),
+            const Footer(), // Footer a ancho completo
           ],
         ),
       ],

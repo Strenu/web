@@ -1,77 +1,128 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:strenu_web/widgets/max_width_container.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // 1. Importamos el nuevo paquete
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
+
+  // --- URLs de tus redes sociales ---
+  static final Uri _instagramUrl = Uri.parse('https://instagram.com/#');
+  static final Uri _linkedinUrl = Uri.parse('https://www.linkedin.com/#');
+  static final Uri _xUrl = Uri.parse('https://x.com/#');
+  static final Uri _youtubeUrl = Uri.parse('https://youtube.com/#');
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-
     final int currentYear = DateTime.now().year;
-
-    // --- LA CORRECCIÓN (Para el copyright) ---
-    final TextStyle copyrightStyle = textTheme.bodySmall ?? const TextStyle();
 
     return Container(
       color: colorScheme.surface,
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 40),
-      child: Column(
-        children: [
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final isNarrow = constraints.maxWidth < 720;
-              final crossAxisAlignment = isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start;
-              final textAlign = isNarrow ? TextAlign.center : TextAlign.left;
+      padding: const EdgeInsets.symmetric(vertical: 40),
+      child: MaxWidthContainer(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: Column(
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isNarrow = constraints.maxWidth < 720;
+                  final crossAxisAlignment = isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start;
+                  final textAlign = isNarrow ? TextAlign.center : TextAlign.left;
 
-              if (isNarrow) {
-                return Column(
-                  crossAxisAlignment: crossAxisAlignment,
-                  children: [
-                    _buildBrandInfo(textTheme, textAlign),
-                    const SizedBox(height: 30),
-                    _buildLinksColumn(context, textTheme, crossAxisAlignment),
-                  ],
-                );
-              }
-              return Row(
-                crossAxisAlignment: crossAxisAlignment,
-                children: [
-                  Expanded(flex: 2, child: _buildBrandInfo(textTheme, textAlign)),
-                  Expanded(flex: 1, child: _buildLinksColumn(context, textTheme, crossAxisAlignment)),
-                ],
-              );
-            },
+                  if (isNarrow) {
+                    return Column(
+                      crossAxisAlignment: crossAxisAlignment,
+                      children: [
+                        _buildBrandInfo(textTheme, textAlign),
+                        const SizedBox(height: 30),
+                        _buildLinksColumn(context, textTheme, crossAxisAlignment),
+                        const SizedBox(height: 30),
+                        _buildSocialsColumn(context, textTheme, crossAxisAlignment),
+                      ],
+                    );
+                  }
+                  
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(flex: 3, child: _buildBrandInfo(textTheme, textAlign)),
+                      Expanded(flex: 2, child: _buildLinksColumn(context, textTheme, crossAxisAlignment)),
+                      Expanded(flex: 1, child: _buildSocialsColumn(context, textTheme, crossAxisAlignment)),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 30),
+              const Divider(thickness: 0.5),
+              const SizedBox(height: 20),
+              Text(
+                '© $currentYear STRENU. Todos los derechos reservados.',
+                style: textTheme.bodySmall?.copyWith(color: Colors.white54),
+              ),
+            ],
           ),
-          const SizedBox(height: 30),
-          const Divider(thickness: 0.5),
-          const SizedBox(height: 20),
-          Text(
-            '© $currentYear STRENU. Todos los derechos reservados.',
-            style: copyrightStyle.copyWith(color: Colors.white54), // Usamos el estilo seguro
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildBrandInfo(TextTheme textTheme, TextAlign textAlign) {
-    // --- LA CORRECCIÓN ---
-    final TextStyle brandNameStyle = textTheme.titleLarge ?? const TextStyle();
-    final TextStyle brandDescStyle = textTheme.bodyMedium ?? const TextStyle();
+  // --- MÉTODO DE REDES SOCIALES ACTUALIZADO ---
+  Widget _buildSocialsColumn(BuildContext context, TextTheme textTheme, CrossAxisAlignment crossAxisAlignment) {
+    return Column(
+      crossAxisAlignment: crossAxisAlignment,
+      children: [
+        Text('Social', style: textTheme.titleMedium),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // 2. Reemplazamos Icon por FaIcon con los logos oficiales
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.instagram),
+              onPressed: () => _launchUrl(_instagramUrl),
+              tooltip: 'Instagram',
+              color: Colors.white70,
+            ),
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.linkedinIn),
+              onPressed: () => _launchUrl(_linkedinUrl),
+              tooltip: 'LinkedIn',
+              color: Colors.white70,
+            ),
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.xTwitter),
+              onPressed: () => _launchUrl(_xUrl),
+              tooltip: 'X (Twitter)',
+              color: Colors.white70,
+            ),
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.youtube),
+              onPressed: () => _launchUrl(_youtubeUrl),
+              tooltip: 'YouTube',
+              color: Colors.white70,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
+  Widget _buildBrandInfo(TextTheme textTheme, TextAlign textAlign) {
     return Column(
       crossAxisAlignment: textAlign == TextAlign.center ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(
           'STRENU',
-          style: brandNameStyle.copyWith(fontWeight: FontWeight.bold),
+          style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
           'Custom software development and AWS cloud consulting.',
-          style: brandDescStyle.copyWith(color: Colors.white70),
+          style: textTheme.bodyMedium?.copyWith(color: Colors.white70),
           textAlign: textAlign,
         ),
       ],
@@ -89,6 +140,12 @@ class Footer extends StatelessWidget {
         _FooterLink(text: 'Sobre Nosotros', onTap: () => context.go('/about')),
       ],
     );
+  }
+  
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      debugPrint('Could not launch $url');
+    }
   }
 }
 

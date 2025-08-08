@@ -34,17 +34,14 @@ class ServicesScreen extends StatelessWidget {
           ),
         ),
         MaxWidthContainer(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: Column(
-              children: AnimateList(
-                interval: 100.ms,
-                effects: [
-                  FadeEffect(duration: 500.ms, curve: Curves.easeOut),
-                  SlideEffect(begin: const Offset(0, 0.05), curve: Curves.easeOut),
-                ],
-                children: sections,
-              ),
+          child: Column(
+            children: AnimateList(
+              interval: 100.ms,
+              effects: [
+                FadeEffect(duration: 500.ms, curve: Curves.easeOut),
+                SlideEffect(begin: const Offset(0, 0.05), curve: Curves.easeOut),
+              ],
+              children: sections,
             ),
           ),
         ),
