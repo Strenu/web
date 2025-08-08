@@ -126,8 +126,6 @@ class AboutScreen extends StatelessWidget {
         const SizedBox(height: 60),
         LayoutBuilder(
           builder: (context, constraints) {
-            // --- LA CORRECCIÓN ESTÁ AQUÍ ---
-            // Hemos bajado el punto de ruptura de 1100 a 960
             if (constraints.maxWidth > 960) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -151,9 +149,18 @@ class AboutScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Expanded(child: values[3]),
+                        // --- LA CORRECCIÓN ESTÁ AQUÍ ---
+                        const Spacer(flex: 1), // Espacio vacío a la izquierda
+                        Expanded(
+                          flex: 2,
+                          child: values[3],
+                        ), // Tarjeta ocupa 2 partes
                         const SizedBox(width: 40),
-                        Expanded(child: values[4]),
+                        Expanded(
+                          flex: 2,
+                          child: values[4],
+                        ), // Tarjeta ocupa 2 partes
+                        const Spacer(flex: 1), // Espacio vacío a la derecha
                       ],
                     ),
                   ),
