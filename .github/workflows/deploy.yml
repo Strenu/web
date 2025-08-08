@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,6 +29,9 @@ jobs:
 
       - name: Build Flutter web
         run: flutter build web --release --base-href "/"
+
+      - name: Add CNAME for custom domain
+        run: echo "strenu.com" > build/web/CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
