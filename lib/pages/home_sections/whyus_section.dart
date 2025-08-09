@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:strenu_web/widgets/benefit_item.dart';
-import 'package:strenu_web/widgets/responsive_card_layout.dart'; // Importamos el nuevo layout
+import 'package:strenu_web/widgets/responsive_card_layout.dart';
 
 class WhyUsSection extends StatelessWidget {
   const WhyUsSection({super.key});
@@ -13,28 +13,27 @@ class WhyUsSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 40),
       child: Column(
         children: [
-          Text(
-            'Why Choose Us?',
-            style: textTheme.headlineMedium,
-          ),
+          Text('Why Choose Us?', style: textTheme.headlineMedium),
           const SizedBox(height: 30),
-          // Reemplazamos el Wrap por nuestro nuevo layout inteligente.
           const ResponsiveCardLayout(
             cards: [
               BenefitItem(
                 icon: Icons.person_search_rounded,
                 title: 'Customer Focus',
-                description: 'We prioritize your success by delivering tailored solutions that exceed expectations.',
+                description:
+                    'We prioritize your success by delivering tailored solutions that exceed expectations.',
               ),
               BenefitItem(
                 icon: Icons.groups_2_rounded,
                 title: 'Expert Team',
-                description: 'Our team of skilled professionals is passionate about technology and innovation.',
+                description:
+                    'Our team of skilled professionals is passionate about technology and innovation.',
               ),
               BenefitItem(
                 icon: Icons.rule_rounded,
                 title: 'Quality Assurance',
-                description: 'We adhere to the highest standards to deliver reliable and robust products.',
+                description:
+                    'We adhere to the highest standards to deliver reliable and robust products.',
               ),
             ],
           ),

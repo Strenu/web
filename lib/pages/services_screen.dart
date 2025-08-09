@@ -14,12 +14,6 @@ class ServicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    final List<Widget> sections = [
-      _buildServicesContent(context),
-      const StrenuDivider(),
-      const CtaSection(),
-    ];
-
     return ListView(
       key: const ValueKey('services'),
       children: [
@@ -41,7 +35,11 @@ class ServicesScreen extends StatelessWidget {
                 FadeEffect(duration: 500.ms, curve: Curves.easeOut),
                 SlideEffect(begin: const Offset(0, 0.05), curve: Curves.easeOut),
               ],
-              children: sections,
+              children: [
+                _buildServicesContent(context),
+                const StrenuDivider(),
+                const CtaSection(),
+              ],
             ),
           ),
         ),

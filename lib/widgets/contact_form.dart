@@ -9,7 +9,7 @@ class ContactForm extends StatefulWidget {
 
 class _ContactFormState extends State<ContactForm> {
   final _formKey = GlobalKey<FormState>();
-  // TODO: Añadir TextEditingControllers si necesitas capturar los datos
+  // TODO: Añadir TextEditingControllers para capturar los datos
   bool _isSending = false;
 
   void _submitForm() {
@@ -21,7 +21,11 @@ class _ContactFormState extends State<ContactForm> {
       Future.delayed(const Duration(seconds: 2), () {
         setState(() => _isSending = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Thank you for your message! We will be in touch shortly.')),
+          const SnackBar(
+            content: Text(
+              'Thank you for your message! We will be in touch shortly.',
+            ),
+          ),
         );
         _formKey.currentState!.reset();
       });
@@ -37,30 +41,39 @@ class _ContactFormState extends State<ContactForm> {
         children: [
           TextFormField(
             decoration: const InputDecoration(labelText: 'Full Name'),
-            validator: (value) => value!.isEmpty ? 'Please enter your name' : null,
+            validator: (value) =>
+                value!.isEmpty ? 'Please enter your name' : null,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: const InputDecoration(labelText: 'Company'),
-             validator: (value) => value!.isEmpty ? 'Please enter your company name' : null,
+            validator: (value) =>
+                value!.isEmpty ? 'Please enter your company name' : null,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: const InputDecoration(labelText: 'Work Email'),
             keyboardType: TextInputType.emailAddress,
-            validator: (value) => (value!.isEmpty || !value.contains('@')) ? 'Please enter a valid email' : null,
+            validator: (value) => (value!.isEmpty || !value.contains('@'))
+                ? 'Please enter a valid email'
+                : null,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: const InputDecoration(labelText: 'How can we help?'),
             maxLines: 5,
-            validator: (value) => value!.isEmpty ? 'Please enter your message' : null,
+            validator: (value) =>
+                value!.isEmpty ? 'Please enter your message' : null,
           ),
           const SizedBox(height: 40),
           ElevatedButton(
             onPressed: _isSending ? null : _submitForm,
             child: _isSending
-                ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 3))
+                ? const SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(strokeWidth: 3),
+                  )
                 : const Text('Send Message'),
           ),
         ],

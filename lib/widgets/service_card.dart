@@ -30,12 +30,9 @@ class ServiceCard extends StatelessWidget {
       ],
     );
 
-    // --- LA CORRECCIÓN ESTÁ AQUÍ ---
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 280),
-      child: StrenuBaseCard(
-        child: content,
-      ),
+      child: StrenuBaseCard(child: content),
     );
   }
 }

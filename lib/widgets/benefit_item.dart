@@ -31,15 +31,9 @@ class BenefitItem extends StatelessWidget {
         Text(description, style: textTheme.bodyMedium),
       ],
     );
-
-    // --- LA CORRECCIÓN ESTÁ AQUÍ ---
-    // Envolvemos la tarjeta base en un ConstrainedBox para darle una altura mínima.
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 280), // Altura mínima generosa
-      child: StrenuBaseCard(
-        enableHover: enableHover,
-        child: content,
-      ),
+      constraints: const BoxConstraints(minHeight: 280),
+      child: StrenuBaseCard(enableHover: enableHover, child: content),
     );
   }
 }

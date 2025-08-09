@@ -7,15 +7,12 @@ class CtaSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
-    // Ya no usamos un Container con fondo, sino un Column simple con padding.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 80),
       child: Column(
         children: [
           Text(
             'Let’s Build Something Amazing Together',
-            // Usamos un estilo de titular grande para crear impacto.
             style: textTheme.displaySmall,
             textAlign: TextAlign.center,
           ),
@@ -26,8 +23,6 @@ class CtaSection extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 50),
-          // Este es ahora el protagonista indiscutible.
-          // Al ser un ElevatedButton, tomará automáticamente el estilo naranja del tema.
           ElevatedButton(
             onPressed: () => context.go('/contact'),
             child: const Text('Get in Touch'),
