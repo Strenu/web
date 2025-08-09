@@ -10,11 +10,10 @@ class AppDrawer extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Drawer(
-      backgroundColor: colorScheme.surface, // Fondo negro, como el footer
+      backgroundColor: colorScheme.surface,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          // Cabecera del Drawer
           DrawerHeader(
             decoration: BoxDecoration(
               color: colorScheme.primary.withOpacity(0.1),
@@ -26,13 +25,12 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          // Links de navegación
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: Text('Home', style: textTheme.titleMedium),
             onTap: () {
               context.go('/');
-              Navigator.pop(context); // Cierra el drawer
+              Navigator.pop(context);
             },
           ),
           ListTile(
@@ -52,7 +50,6 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
-          // Botón de Contacto
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(

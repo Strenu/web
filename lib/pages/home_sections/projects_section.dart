@@ -11,34 +11,43 @@ class ProjectsSection extends StatelessWidget {
     final List<Map<String, dynamic>> projects = [
       {
         'title': 'OptiStock - Inventory Management',
-        'description': 'A custom web platform to optimize stock levels and automate supply chain logistics for a multi-warehouse retail company.',
-        // --- IMAGEN CORREGIDA ---
-        'imageUrl': 'https://images.unsplash.com/photo-1542744095-291d1f67b221?q=80&w=1170&auto=format&fit=crop',
+        'description':
+            'A custom web platform to optimize stock levels and automate supply chain logistics for a multi-warehouse retail company.',
+        'imageUrl':
+            'https://images.unsplash.com/photo-1542744095-291d1f67b221?q=80&w=1170&auto=format&fit=crop',
         'tags': ['Flutter Web', 'AWS Lambda', 'DynamoDB'],
       },
       {
         'title': 'ConnectApp - B2B Platform',
-        'description': 'A cross-platform mobile app for industry professionals to connect, collaborate, and share insights securely.',
-        'imageUrl': 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1332&auto=format&fit=crop',
+        'description':
+            'A cross-platform mobile app for industry professionals to connect, collaborate, and share insights securely.',
+        'imageUrl':
+            'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1332&auto=format&fit=crop',
         'tags': ['Flutter Mobile', 'Firebase', 'Cloud Functions'],
       },
       {
         'title': 'Cloud Migration for Enterprise',
-        'description': 'Full infrastructure migration to AWS for a legacy enterprise system, improving performance by 200% and reducing operational costs.',
-        // --- IMAGEN CORREGIDA ---
-        'imageUrl': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1170&auto=format&fit=crop',
+        'description':
+            'Full infrastructure migration to AWS for a legacy enterprise system, improving performance by 200% and reducing operational costs.',
+        'imageUrl':
+            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1170&auto=format&fit=crop',
         'tags': ['AWS', 'EC2', 'S3', 'DevOps'],
-      }
+      },
     ];
 
-    // El PageController ahora vive aquí para poder pasarlo al PageView
-    final PageController pageController = PageController(viewportFraction: 0.85);
+    final PageController pageController = PageController(
+      viewportFraction: 0.85,
+    );
 
     return Column(
       children: [
         Text('Featured Projects', style: textTheme.headlineMedium),
         const SizedBox(height: 20),
-        Text('We turn complex challenges into robust digital solutions.', style: textTheme.bodyMedium, textAlign: TextAlign.center),
+        Text(
+          'We turn complex challenges into robust digital solutions.',
+          style: textTheme.bodyMedium,
+          textAlign: TextAlign.center,
+        ),
         const SizedBox(height: 50),
         SizedBox(
           height: 480,

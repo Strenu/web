@@ -18,12 +18,10 @@ class TeamMemberCard extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Card(
-      // Clip.antiAlias asegura que la imagen no se desborde de los bordes redondeados.
       clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
         child: Column(
-          // Centramos el contenido verticalmente en la celda del Grid
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipOval(

@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
+  ///TODO: Add links to social media and other pages
   static final Uri _instagramUrl = Uri.parse('https://instagram.com/#');
   static final Uri _linkedinUrl = Uri.parse('https://www.linkedin.com/#');
   static final Uri _xUrl = Uri.parse('https://x.com/#');
@@ -29,8 +30,12 @@ class Footer extends StatelessWidget {
               LayoutBuilder(
                 builder: (context, constraints) {
                   final isNarrow = constraints.maxWidth < 720;
-                  final crossAxisAlignment = isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start;
-                  final textAlign = isNarrow ? TextAlign.center : TextAlign.left;
+                  final crossAxisAlignment = isNarrow
+                      ? CrossAxisAlignment.center
+                      : CrossAxisAlignment.start;
+                  final textAlign = isNarrow
+                      ? TextAlign.center
+                      : TextAlign.left;
 
                   if (isNarrow) {
                     return Column(
@@ -38,19 +43,44 @@ class Footer extends StatelessWidget {
                       children: [
                         _buildBrandInfo(textTheme, textAlign),
                         const SizedBox(height: 30),
-                        _buildLinksColumn(context, textTheme, crossAxisAlignment),
+                        _buildLinksColumn(
+                          context,
+                          textTheme,
+                          crossAxisAlignment,
+                        ),
                         const SizedBox(height: 30),
-                        _buildSocialsColumn(context, textTheme, crossAxisAlignment),
+                        _buildSocialsColumn(
+                          context,
+                          textTheme,
+                          crossAxisAlignment,
+                        ),
                       ],
                     );
                   }
-                  
+
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(flex: 3, child: _buildBrandInfo(textTheme, textAlign)),
-                      Expanded(flex: 2, child: _buildLinksColumn(context, textTheme, crossAxisAlignment)),
-                      Expanded(flex: 1, child: _buildSocialsColumn(context, textTheme, crossAxisAlignment)),
+                      Expanded(
+                        flex: 3,
+                        child: _buildBrandInfo(textTheme, textAlign),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: _buildLinksColumn(
+                          context,
+                          textTheme,
+                          crossAxisAlignment,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: _buildSocialsColumn(
+                          context,
+                          textTheme,
+                          crossAxisAlignment,
+                        ),
+                      ),
                     ],
                   );
                 },
@@ -69,7 +99,11 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialsColumn(BuildContext context, TextTheme textTheme, CrossAxisAlignment crossAxisAlignment) {
+  Widget _buildSocialsColumn(
+    BuildContext context,
+    TextTheme textTheme,
+    CrossAxisAlignment crossAxisAlignment,
+  ) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
@@ -110,7 +144,9 @@ class Footer extends StatelessWidget {
 
   Widget _buildBrandInfo(TextTheme textTheme, TextAlign textAlign) {
     return Column(
-      crossAxisAlignment: textAlign == TextAlign.center ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: textAlign == TextAlign.center
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         Text(
           'STRENU',
@@ -126,7 +162,11 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildLinksColumn(BuildContext context, TextTheme textTheme, CrossAxisAlignment crossAxisAlignment) {
+  Widget _buildLinksColumn(
+    BuildContext context,
+    TextTheme textTheme,
+    CrossAxisAlignment crossAxisAlignment,
+  ) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
@@ -138,7 +178,7 @@ class Footer extends StatelessWidget {
       ],
     );
   }
-  
+
   Future<void> _launchUrl(Uri url) async {
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       debugPrint('Could not launch $url');

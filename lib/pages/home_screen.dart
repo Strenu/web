@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Definimos las secciones que irán dentro del contenedor centrado
     final List<Widget> sections = [
       const ProjectsSection(),
       const StrenuDivider(),
@@ -43,22 +42,24 @@ class HomeScreen extends StatelessWidget {
         ListView(
           key: const ValueKey('home'),
           children: [
-            const HeroSection(), // Hero Section a ancho completo
-            // Contenedor principal para el resto del contenido
+            const HeroSection(),
             MaxWidthContainer(
               child: Column(
                 children: AnimateList(
                   interval: 100.ms,
                   effects: [
                     FadeEffect(duration: 500.ms, curve: Curves.easeOut),
-                    SlideEffect(begin: const Offset(0, 0.05), curve: Curves.easeOut),
+                    SlideEffect(
+                      begin: const Offset(0, 0.05),
+                      curve: Curves.easeOut,
+                    ),
                   ],
                   children: sections,
                 ),
               ),
             ),
             const SizedBox(height: 80),
-            const Footer(), // Footer a ancho completo
+            const Footer(),
           ],
         ),
       ],

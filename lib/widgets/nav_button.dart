@@ -25,12 +25,11 @@ class _NavButtonState extends State<NavButton> {
     final textTheme = Theme.of(context).textTheme;
 
     final bool isUnderlined = _isHovered || widget.isActive;
-    final Color textColor = widget.isActive ? colorScheme.primary : colorScheme.onSurface;
+    final Color textColor = widget.isActive
+        ? colorScheme.primary
+        : colorScheme.onSurface;
 
-    // --- LA CORRECCIÓN ---
-    // 1. Obtenemos el estilo base del tema.
-    final TextStyle baseStyle = textTheme.labelLarge ?? const TextStyle(); 
-    // 2. Aplicamos nuestros cambios sobre ese estilo base.
+    final TextStyle baseStyle = textTheme.labelLarge ?? const TextStyle();
     final TextStyle buttonTextStyle = baseStyle.copyWith(color: textColor);
 
     return MouseRegion(
@@ -46,17 +45,14 @@ class _NavButtonState extends State<NavButton> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              widget.text,
-              style: buttonTextStyle, // 3. Usamos el estilo seguro.
-            ),
+            Text(widget.text, style: buttonTextStyle),
             const SizedBox(height: 4),
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 2,
               width: isUnderlined ? 30 : 0,
               color: colorScheme.primary,
-            )
+            ),
           ],
         ),
       ),

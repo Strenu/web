@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // --- PALETA DE COLORES ESTRATÉGICA ---
   static const Color primaryColor = Color(0xFF1E88E5);
   static const Color accentColor = Color(0xFFFF9900);
   static const Color backgroundColor = Color(0xFF121212);
@@ -37,46 +36,41 @@ class AppTheme {
         onError: Colors.white,
       ),
 
-      // --- TEMA DE TEXTO CON MÁS IMPACTO ---
       textTheme: baseTextTheme.copyWith(
-        // Para el titular principal de la Hero Section
         displayMedium: baseTextTheme.displayMedium?.copyWith(
           color: primaryColor,
           fontWeight: FontWeight.bold,
-          fontSize: 52, // Aumentado
+          fontSize: 52,
         ),
         // Para titulares de página (About, Services)
         displaySmall: baseTextTheme.displaySmall?.copyWith(
           color: textPrimaryColor,
           fontWeight: FontWeight.bold,
-          fontSize: 48, // Aumentado
+          fontSize: 48,
         ),
         // Para titulares de sección en la Home
         headlineMedium: baseTextTheme.headlineMedium?.copyWith(
           color: primaryColor,
           fontWeight: FontWeight.bold,
-          fontSize: 40, // Aumentado
+          fontSize: 40,
         ),
         // Para los títulos de las tarjetas
         titleLarge: baseTextTheme.titleLarge?.copyWith(
           color: textPrimaryColor,
-          fontWeight: FontWeight.w600, // Ligeramente más grueso
-          fontSize: 20, // Aumentado
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
         ),
         bodyMedium: baseTextTheme.bodyMedium?.copyWith(
           fontSize: 16,
           height: 1.5,
         ),
-        bodyLarge: baseTextTheme.bodyLarge?.copyWith(
-          fontSize: 20,
-          height: 1.6,
-        ),
+        bodyLarge: baseTextTheme.bodyLarge?.copyWith(fontSize: 20, height: 1.6),
         labelLarge: baseTextTheme.labelLarge?.copyWith(
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
       ),
-      
+
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -87,11 +81,14 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: accentColor,
           foregroundColor: Colors.black,
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18), // Un poco más alto
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          textStyle: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16),
+          textStyle: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
         ),
       ),
 
@@ -104,7 +101,7 @@ class AppTheme {
         ),
         margin: const EdgeInsets.all(8),
       ),
-      
+
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

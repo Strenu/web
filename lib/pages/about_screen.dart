@@ -149,25 +149,17 @@ class AboutScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // --- LA CORRECCIÓN ESTÁ AQUÍ ---
-                        const Spacer(flex: 1), // Espacio vacío a la izquierda
-                        Expanded(
-                          flex: 2,
-                          child: values[3],
-                        ), // Tarjeta ocupa 2 partes
+                        const Spacer(flex: 1),
+                        Expanded(flex: 2, child: values[3]),
                         const SizedBox(width: 40),
-                        Expanded(
-                          flex: 2,
-                          child: values[4],
-                        ), // Tarjeta ocupa 2 partes
-                        const Spacer(flex: 1), // Espacio vacío a la derecha
+                        Expanded(flex: 2, child: values[4]),
+                        const Spacer(flex: 1),
                       ],
                     ),
                   ),
                 ],
               );
             }
-            // En pantallas estrechas, la columna normal.
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [

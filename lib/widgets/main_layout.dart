@@ -35,7 +35,6 @@ class MainLayout extends StatelessWidget {
             : null,
         title: MaxWidthContainer(
           child: Row(
-            // En pantallas estrechas, centramos el logo si no hay botones
             mainAxisAlignment: isNarrow
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.start,
@@ -46,7 +45,6 @@ class MainLayout extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // El Spacer solo es necesario si hay elementos a la derecha
               if (!isNarrow) const Spacer(),
               if (!isNarrow)
                 Row(
@@ -77,7 +75,6 @@ class MainLayout extends StatelessWidget {
             ],
           ),
         ),
-        // Esto asegura que el title ocupe todo el espacio para poder centrar bien el MaxWidthContainer
         centerTitle: true,
       ),
       drawer: isNarrow ? const AppDrawer() : null,

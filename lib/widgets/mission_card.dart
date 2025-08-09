@@ -25,15 +25,13 @@ class MissionCard extends StatelessWidget {
         constraints: const BoxConstraints(minHeight: 400),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // En pantallas anchas, usamos el Stack con el Clipper
             if (constraints.maxWidth > 800) {
               return Stack(
                 children: [
                   Positioned.fill(child: Container(color: colorScheme.surface)),
                   Positioned.fill(
                     child: ClipPath(
-                      clipper:
-                          DiagonalImageClipper(), // Usa el clipper con los valores fijos
+                      clipper: DiagonalImageClipper(),
                       child: Image.network(
                         imageUrl,
                         fit: BoxFit.cover,
@@ -44,7 +42,7 @@ class MissionCard extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        flex: 6, // Damos un poco más de espacio al texto
+                        flex: 6,
                         child: Padding(
                           padding: const EdgeInsets.all(40.0),
                           child: Column(
@@ -69,7 +67,6 @@ class MissionCard extends StatelessWidget {
                 ],
               );
             }
-            // En pantallas estrechas, el layout simple en columna
             return Column(
               children: [
                 Image.network(

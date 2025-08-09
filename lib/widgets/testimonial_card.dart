@@ -27,7 +27,7 @@ class TestimonialCard extends StatelessWidget {
         const SizedBox(height: 16),
         Expanded(
           child: Text(
-            '"${quote}"',
+            '"$quote"',
             style: textTheme.titleLarge?.copyWith(
               fontStyle: FontStyle.italic,
               color: Colors.white.withOpacity(0.9),
@@ -50,8 +50,7 @@ class TestimonialCard extends StatelessWidget {
       radius: 80,
       backgroundImage: NetworkImage(imageUrl),
       onBackgroundImageError: (_, __) {},
-      backgroundColor: colorScheme.surface, // Color de fondo si la imagen falla
-      // child: const Icon(Icons.person, size: 80), // <-- LÍNEA ELIMINADA
+      backgroundColor: colorScheme.surface,
     );
 
     return Card(
@@ -70,10 +69,11 @@ class TestimonialCard extends StatelessWidget {
             }
             return Column(
               children: [
-                // Para móvil, hacemos la imagen un poco más pequeña
-                CircleAvatar(radius: 60, backgroundImage: NetworkImage(imageUrl)),
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(imageUrl),
+                ),
                 const SizedBox(height: 32),
-                // Y el texto no necesita ser 'Expanded'
                 ...textContent.children.where((w) => w is! Expanded),
               ],
             );
